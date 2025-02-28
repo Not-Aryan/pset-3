@@ -28,7 +28,9 @@ For the best editing experience, install the following VS Code extensions:
 
 In this problem set, you'll be implementing a struction-from-motion pipeline (SfM) from the ground up, from camera calibration to fundamental matrix estimation. You'll be testing your pipeline either in a simulated environment or in the real world to create a 3D point cloud of an environment from multi-view images.
 
-Images that you will create will be save to their respective problem folder in `data/p[x]_problem_name`
+This problem set was created by Christian Arnold (cmarnold@mit.edu) and Isabella Yu (iyu@mit.edu).
+
+Images that you will create will be save to their respective problem folder in `outputs/p[x]_problem_name`
 
 ## Part 1 - Edge Detection (15 pts)
 
@@ -40,7 +42,7 @@ Complete the `ContourImage()` class `p1_edge_identification.py` to prepare the i
 
 ### 1.b - Find Contours (10 pts)
 
-Complete the `find_contours(binary_image, foreground=1)` function definition in `p1_edge_identification.py`. The output of this function should be a one-dimensional list of `(u, v)` coordinates of every edge in the image. Your final output will look similar to the image below.
+Complete the `find_contours(binary_image, foreground=1)` function definition in `p1_edge_identification.py`, then run `python -m src.p1_edge_identification`. The output of this function should be a one-dimensional list of `(u, v)` coordinates of every edge in the image. Your final output will look similar to the image below.
 
 ![contours](data/figures/find_contours.png)
 
@@ -90,7 +92,7 @@ where
 
 $r^2 = x^2 + y^2$
 
-Your task is to undo the distortion of the original image using the recovered intrinsic matrix and distortion coefficients by completing the definition of `undistort_image(image, camera_matrix, dist_coeffs)` in `p2_calibrate_camera.py`. It is helpful to break the problem down into two parts: 1) Recover the Optimal Camera Matrix, and 2) undistort the image and apply the new Optimal Camera Matrix.
+Your task is to undo the distortion of the original image using the recovered intrinsic matrix and distortion coefficients by completing the definition of `undistort_image(image, camera_matrix, dist_coeffs)` in `p2_calibrate_camera.py`. It is helpful to break the problem down into two parts: 1) Recover the Optimal Camera Matrix, and 2) undistort the image and apply the new Optimal Camera Matrix. Run `python -m src.p2_camera_calibration` to recover the camera parameters from simulation.
 
 Do not use OpenCV functions. If you are stuck, you may use `cv2.getOptimalNewCameraMatrix` and `cv2.undistort` for half credit.
 
@@ -156,7 +158,7 @@ Implement the function `compute_rectified_image(im, H)` which applies the homogr
 
 Once rectified, corresponding points in the two images should lie on the same horizontal line, which can be verified by the output image. Do not use OpenCV functions in this section.
 
-Now, run `python src.p4_image_rectification` get the rectified images of our test object. The rectification output should look like this:
+Now, run `python -m src.p4_image_rectification` get the rectified images of our test object. The rectification output should look like this:
 ![image](data/figures/rectified.png)
 
 
@@ -218,7 +220,13 @@ Expected point cloud output:
 
 
 ## Part 6 - full SfM pipeline (extra credit, open-ended) (10 pts)
-Now, we can use all of the previous functions to get a point cloud from more than two images. This might require bundle adjustment for jointly optimizing camera parameters and the point cloud, as well as defining some correspondences manually, to get a reasonable looking point cloud. Implement `bundle adjustment`, `reprojection_error`, and `main` in `p6_SFM_pipeline.py` to get a point cloud of the statue dataset `env.p5.statue_images` from 5 or more views. We will only be grading your implementation of `bundle_adjustment` and `reprojection_error`.
+Now, we can use all of the previous functions to get a point cloud from more than two images. This might require bundle adjustment for jointly optimizing camera parameters and the point cloud, as well as defining some correspondences manually, to get a reasonable looking point cloud. Implement `bundle adjustment`, `reprojection_error`, and `main` in `p6_SFM_pipeline.py` to get a point cloud of the statue dataset `env.p5.statue_images` from 5 or more views. We will only be grading your implementation of `bundle_adjustment` and `reprojection_error`. Then run `python -m src.p6_SfM_pipeline` to produce a point cloud.
 
 This was our output point cloud from the statue dataset (using some handcrafted points):
 ![sfm_output](data/figures/pointcloud_statue.png)
+
+Feel free to run camera calibration on your own phone using a printed-out checkerboard if you want to capture real-world images! We recommend printing out the checkerboard intead of taking pictures of the checkerboard on your screen to reduce moire effects. The checkerboard should cover the entire FoV of the camera.
+
+# Attribution
+Parts of this pset were inspired by CS231A, taught by Jeanette Bohg in spring 2024.
+The Arc de Triomphe model can be found here: https://rigmodels.com/model.php?view=Arc_de_Triomphe_3d_model__65937fd27de647c0a8ac99ce8275c03e. It has a royalty-free license.
