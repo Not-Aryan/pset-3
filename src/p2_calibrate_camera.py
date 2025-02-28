@@ -76,7 +76,8 @@ def draw_corners(image: np.ndarray, chessboard_size: tuple, corners: np.ndarray)
 
 
 if __name__ == "__main__":
-
+    if not os.path.exists(env.p2.output):
+        os.makedirs(env.p2.output)  
     # Part 2.a
     ideal_intrinsic_matrix = np.array([
         [0, 0, 0],

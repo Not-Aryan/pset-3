@@ -27,11 +27,10 @@ def bundle_adjustment(camera_params, points_3d, camera_indices, point_indices, o
 
 
 def main():
-    """
-    Main function for the Structure from Motion pipeline
-    """
+    if not os.path.exists(env.p6.output):
+        os.makedirs(env.p6.output)
     chessboard_size = (16, 10)  # columns, rows
-    images_folder = env.p5.statue_images
+    images_folder = env.p6.statue_images
     chessboard_path = env.p5.chessboard
 
     camera_matrix, dist_coeffs = calibrate_camera_from_chessboard(chessboard_path, chessboard_size)

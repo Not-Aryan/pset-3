@@ -178,6 +178,8 @@ def show_points_matplotlib(points3D: np.ndarray) -> None:
 
 
 if __name__ == '__main__':
+    if not os.path.exists(env.p5.output):
+        os.makedirs(env.p5.output)
     chessboard_size = (16, 10)  # (columns, rows)
     import argparse
     parser = argparse.ArgumentParser()

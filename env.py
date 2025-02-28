@@ -50,8 +50,13 @@ class p5:
     arc_texture = data / 'arc_de_triomphe' / 'model.mtl'
     chessboard = data / 'chessboard.png'
     raw_images = data / 'raw_images'
-    statue_images = data / 'statue'
     undistorted_images = output / 'undistorted_images'
     rotation_matrix = output / 'rotation_matrix.npy'
     translation_matrix = output / 'translation_matrix.npy'
+    pointcloud = output / 'pointcloud.npy'
+
+class p6:
+    data = project_data / 'p6_SfM_pipeline'
+    output = output / 'p6_SfM_pipeline'
+    statue_images = data / 'statue'
     pointcloud = output / 'pointcloud.npy'

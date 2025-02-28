@@ -152,6 +152,8 @@ def get_epipolar_img(img: np.ndarray,
     return points_img 
 
 if __name__ == '__main__':
+    if not os.path.exists(env.p3.output):
+        os.makedirs(env.p3.output)
     im1 = utils.load_image(env.p3.const_im1)
     im2 = utils.load_image(env.p3.const_im2)
 
