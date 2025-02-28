@@ -94,13 +94,13 @@ Your task is to undo the distortion of the original image using the recovered in
 
 Do not use OpenCV functions. If you are stuck, you may use `cv2.getOptimalNewCameraMatrix` and `cv2.undistort` for half credit.
 
-## Part 3 - Epipolar Geometry (15 pts)
+## Part 3 - Epipolar Geometry (20 pts)
 
 In this part, you will work on the geometric relationship between two views of a scene. Your goal is to compute the fundamental matrix using two different methods and then use the matrix to draw epipolar lines that explain how points in one image constrain the location of corresponding points in the other image.
 
 ![Epipolar_geometry](data/figures/epipolar_diagram.png)
 
-### 3.a - Fundamental Matrix - Least Squares Method (10 pts)
+### 3.a - Fundamental Matrix - Least Squares Method (7 pts)
 
 Implement the `lstsq_eight_point_alg` in `p3_fundamental_matrix.py`. This method forms a system of equations based on corresponding points in two images. By stacking the constraints into a matrix (denoted as W), the method uses singular value decomposition (SVD) to solve for the fundamental matrix F that satisfies:
 
@@ -108,7 +108,7 @@ $p'^TFp = 0$
 
 After obtaining an initial solution, enforce that F has rank 2 by zeroing out the smallest singular value. Do not use OpenCV functions in this section.
 
-### 3.b - Fundamental Matrix - Normalized Method (8 pts)
+### 3.b - Fundamental Matrix - Normalized Method (7 pts)
 
 Implement the `normalized_eight_point_alg` in `p3_fundamental_matrix.py`. In the normalized eight-point algorithm, you first normalize the coordinates of the input points by translating the points so that their centroid is at the origin and scaling the points so that the mean squared distance from the origin is 2.
 
@@ -116,7 +116,7 @@ The normalization is done with transformation matrices T and T'. Once normalized
 
 The normalization further refines F. Notice how the average distance to the epipolar lines are smaller using the normalized method. Do not use OpenCV functions in this section.
 
-### 3.c - Compute Epipolar Lines (7 pts)
+### 3.c - Compute Epipolar Lines (6 pts)
 
 Now implement `compute_epipolar_lines`. Once you have a fundamental matrix, you can compute the corresponding epipolar line for any given point in one image. The epipolar line is computed by multiplying the fundamental matrix with the homogeneous coordinate of a point, where `l = F.dot(p)`.
 
@@ -168,7 +168,7 @@ Implement `find_matches` using `cv2.SIFT_create()` to identify features between 
 
 Filter for `good_matches` by using a ratio threshold of 0.75.
 
-## Part 5 - 3D Reconstruction (35 pts)
+## Part 5 - 3D Reconstruction (30 pts)
 
 This is the last component of a basic Structure from Motion pipeline. More complex versions of SfM have further refining steps like dense reconstruction and texturing, but we will stop at a sparse point cloud. We'll be constructing a point cloud of a model of the Arc de Triomphe, which is found in `data/p5_3D_reconstruction/arc_de_triomphe`
 
@@ -192,7 +192,7 @@ Implement `estimate_initial_RT`.
 
 Use singular value decomposition (SVD) of the essential matrix to obtain two candidate rotations and two candidate translations. These are potential relative poses between the camera views.
 
-### 5.d - Recover Best Camera Pose (10 pts)
+### 5.d - Recover Best Camera Pose (5 pts)
 
 Implement `find_best_RT`.
 
