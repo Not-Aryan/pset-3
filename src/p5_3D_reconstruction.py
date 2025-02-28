@@ -232,3 +232,4 @@ if __name__ == '__main__':
     print("Singular values of F:", S)
 
     show_points_matplotlib(pts3D)
+    np.save(env.p5.pointcloud, pts3D)

@@ -169,5 +169,3 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-
-data/p3_fundamental_matrix/arc_de_triomphe/*
