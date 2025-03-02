@@ -72,7 +72,7 @@ To calibrate the camera, we need to compare the image corners with the correspon
 
 Once you have correctly defined the 3D points, you should be able to recover the intrinsic matrix and estimated distortion coefficients. We have artificially distorted the image, so the recovered intrinsic matrix may be different from the ideal matrix you computed in 2.a.
 
-\*\*Note: All methods of camera calibration are providing an over-fitted guess, thus the recovered distorition will not be the same as the actual distortion applied to the image.
+**Note:** All methods of camera calibration are providing an over-fitted guess, thus the recovered distorition will not be the same as the actual distortion applied to the image.
 
 ### 2.d - Image Distortions (6 pts)
 
@@ -122,7 +122,7 @@ The normalization further refines F. Notice how the average distance to the epip
 
 Now implement `compute_epipolar_lines`. Once you have a fundamental matrix, you can compute the corresponding epipolar line for any given point in one image. The epipolar line is computed by multiplying the fundamental matrix with the homogeneous coordinate of a point, where `l = F.dot(p)`.
 
-l is the line defined by Ax + By + C = 0. Extract the line parameters as a slope-intercept (m, b) in y = mx + b for easy drawing on the image.
+$$l$$ is the line defined by $$Ax + By + C = 0$$. Extract the line parameters as a slope-intercept $$(m, b)$$ in $$y = mx + b$$ for easy drawing on the image.
 
 Run `python -m src.p3_image_rectification` to produce the resulting images. You should now see that all epipolar lines pass through or close to the defined points.
 
@@ -144,9 +144,9 @@ Once you have the epipoles, the next step is to compute the homographies that wi
 
 Implement the function `compute_matching_homographies`.
 
-For the first image, use the computed H_2 and additional constraints based on the fundamental matrix to compute a matching homography H_1 that maintains the correspondence between the two rectified images.
+For the first image, use the computed $$H_2$$ and additional constraints based on the fundamental matrix to compute a matching homography $$H_1$$ that maintains the correspondence between the two rectified images.
 
-For the second image, translate the image so that its center is at the origin. Rotate the image so that the epipole is aligned with the x-axis. Apply a projective transformation that sends the epipole to infinity. Combine these steps into a single homography H_2.
+For the second image, translate the image so that its center is at the origin. Rotate the image so that the epipole is aligned with the x-axis. Apply a projective transformation that sends the epipole to infinity. Combine these steps into a single homography $$H_2$$.
 
 Solve for the affine component using a least-squares fit (`np.linalg.lstsq`) that relates the transformed matching points in the two images. Do not use OpenCV functions in this section.
 
@@ -186,7 +186,9 @@ Implement `compute_essential_matrix`
 
 Convert the fundamental matrix into the essential matrix using the intrinsic camera matrix. The essential matrix relates corresponding normalized image points and is used to derive the relative camera pose.
 
-E = K^T.dot(F.dot(K))
+$$
+E = K^T F K
+$$
 
 ### 5.c - Estimate Camera Pose (10 pts)
 
