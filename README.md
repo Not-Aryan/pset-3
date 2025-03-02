@@ -84,15 +84,19 @@ Distortion Coefficients recovered by OpenCV are defined as $(k_1, k_2, p_1, p_2,
 
 The below equation applies a distortion.
 
-$x_\text{distorted} = x(1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2p_1xy + p_2(r^2 + 2x^2)$
+$$x_\text{distorted} = x(1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2p_1xy + p_2(r^2 + 2x^2)$$
 
-$y_\text{distorted} = y(1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2p_2xy + p_1(r^2 + 2y^2)$
+$$y_\text{distorted} = y(1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2p_2xy + p_1(r^2 + 2y^2)$$
 
 where 
 
-$r^2 = x^2 + y^2$
+$$r^2 = x^2 + y^2$$
 
-Your task is to undo the distortion of the original image using the recovered intrinsic matrix and distortion coefficients by completing the definition of `undistort_image(image, camera_matrix, dist_coeffs)` in `p2_calibrate_camera.py`. It is helpful to break the problem down into two parts: 1) Recover the Optimal Camera Matrix, and 2) undistort the image and apply the new Optimal Camera Matrix. Run `python -m src.p2_camera_calibration` to recover the camera parameters from simulation.
+Your task is to undo the distortion of the original image using the recovered intrinsic matrix and distortion coefficients by completing the definition of `undistort_image(image, camera_matrix, dist_coeffs)` in `p2_calibrate_camera.py`. It is helpful to break the problem down into two parts: 
+1. Recover the Optimal Camera Matrix, and
+2. Undistort the image and apply the new Optimal Camera Matrix.
+
+Run `python -m src.p2_camera_calibration` to recover the camera parameters from simulation.
 
 Do not use OpenCV functions. If you are stuck, you may use `cv2.getOptimalNewCameraMatrix` and `cv2.undistort` for half credit.
 
@@ -106,7 +110,7 @@ In this part, you will work on the geometric relationship between two views of a
 
 Implement the `lstsq_eight_point_alg` in `p3_fundamental_matrix.py`. This method forms a system of equations based on corresponding points in two images. By stacking the constraints into a matrix (denoted as W), the method uses singular value decomposition (SVD) to solve for the fundamental matrix F that satisfies:
 
-$p'^TFp = 0$
+$$p'^TFp = 0$$
 
 After obtaining an initial solution, enforce that F has rank 2 by zeroing out the smallest singular value. Do not use OpenCV functions in this section.
 
@@ -114,9 +118,9 @@ After obtaining an initial solution, enforce that F has rank 2 by zeroing out th
 
 Implement the `normalized_eight_point_alg` in `p3_fundamental_matrix.py`. In the normalized eight-point algorithm, you first normalize the coordinates of the input points by translating the points so that their centroid is at the origin and scaling the points so that the mean squared distance from the origin is 2.
 
-The normalization is done with transformation matrices T and T'. Once normalized, you compute the fundamental matrix using the least-squares method from Part 3.a and then “denormalize” the result to obtain the final fundamental matrix.
+The normalization is done with transformation matrices $T$ and $T'$. Once normalized, you compute the fundamental matrix using the least-squares method from Part 3.a and then “denormalize” the result to obtain the final fundamental matrix.
 
-The normalization further refines F. Notice how the average distance to the epipolar lines are smaller using the normalized method. Do not use OpenCV functions in this section.
+The normalization further refines $F$. Notice how the average distance to the epipolar lines are smaller using the normalized method. Do not use OpenCV functions in this section.
 
 ### 3.c - Compute Epipolar Lines (6 pts)
 
@@ -134,7 +138,7 @@ In this part, you will work on aligning (rectifying) two images so that their ep
 
 ### 4.a - Compute Epipoles (4 pts)
 
-The epipoles are the points of intersection of the camera's optical axis with the image plane. They serve as the “center of projection” for the corresponding epipolar lines in each image.
+The epipoles are the points of intersection of the camera's optical axis with the image plane. They serve as the "center of projection" for the corresponding epipolar lines in each image.
 
 Implement `compute_epipole` in `p4_image_rectification.py`. Compute the epipolar lines by multiplying the fundamental matrix with the points from the other image. Use singular value decomposition (SVD) to solve for the epipole that satisfies the homogeneous equation l.dot(e) = 0, where l is the epipolar line and e is the epipole. Normalize the epipole so that the last coordinate is 1. Do not use OpenCV functions in this section.
 
@@ -186,9 +190,7 @@ Implement `compute_essential_matrix`
 
 Convert the fundamental matrix into the essential matrix using the intrinsic camera matrix. The essential matrix relates corresponding normalized image points and is used to derive the relative camera pose.
 
-$$
-E = K^T F K
-$$
+$$E = K^T F K$$
 
 ### 5.c - Estimate Camera Pose (10 pts)
 
