@@ -80,7 +80,7 @@ The most common form of image distortion is radial distortion. Every real camera
 
 ![distortions](data/figures/distortions.png)
 
-Distortion Coefficients recovered by OpenCV are defined as $(k1, k2, k3, k4)$
+Distortion Coefficients recovered by OpenCV are defined as $(k_1, k_2, p_1, p_2, k_3)$
 
 The below equation applies a distortion.
 
