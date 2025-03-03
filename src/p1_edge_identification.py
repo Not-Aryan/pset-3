@@ -26,7 +26,7 @@ class ContourImage():
         self.image = image
         self.binarized_image = None
 
-    def binarize(self) -> None:
+    def binarize(self, threshold=128) -> None:
         """
         Convert the image to a binary image.
         """
