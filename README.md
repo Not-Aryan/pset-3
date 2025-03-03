@@ -58,7 +58,7 @@ In previous psets, you have already been introduced to the Intrinsic Camera Matr
 
 Where `f_x, f_y` are the focal ratios for that axis and `c_x, c_y` are the `u, v` coordinates for the center of the image.
 
-Imagine a pinhole camera with a small aperture (“pinhole”) at the origin of our coordinate system. The camera is oriented so that the optical (principal) axis is the Z-axis, pointing forward. The image plane is placed at Z = f (focal length f ) in front of the pinhole. A pinhole camera creates a perfect image with no distortions where `f_x = f_y = f_r * max(image_height, image_width)` and `f_r = 1 / (tan(1/FoV)` where the FoV (Field of View) is in radians. Assume the FoV is 45 degrees. Calculate an intrinsic matrix for the image found in `data/p1_edge_identification/chessboard.png` and assign the value of `ideal_instrinsic_matrix` in `p2_calibrate_camera.py`.
+Imagine a pinhole camera with a small aperture (“pinhole”) at the origin of our coordinate system. The camera is oriented so that the optical (principal) axis is the Z-axis, pointing forward. The image plane is placed at Z = f (focal length f ) in front of the pinhole. A pinhole camera creates a perfect image with no distortions where `f_x = f_y = f_r * min(image_height, image_width)` and `f_r = 1 / 2tan(FoV/2)` where the FoV (Field of View) is in radians. Assume the FoV is 45 degrees. Calculate an intrinsic matrix for the image found in `data/p1_edge_identification/chessboard.png` and assign the value of `ideal_instrinsic_matrix` in `p2_calibrate_camera.py`.
 
 ### 2.b - Find Corners (2 pts)
 
