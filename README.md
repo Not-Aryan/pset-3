@@ -34,7 +34,7 @@ Images that you will create will be save to their respective problem folder in `
 
 ## Part 1 - Edge Detection (15 pts)
 
-The most important part of any SfM pipeline is calibrating the camera. This is commonly done with a chessboard object containing a specified number of squares. The best calibration comes from chessboards that space the entirety of the image plane, so chessboard images are not necessarly square like a normal chessboard. In this exercise, you will identify the edges, or the contours of the image. This is a critical step in calibrating the camera. There are many possible implementations for edge detectors, we only require that you not use an existing utility like opencv to detect contours. 
+The most important part of any SfM pipeline is calibrating the camera. This is commonly done with a chessboard object containing a specified number of squares. The best calibration comes from chessboards that space the entirety of the image plane, so chessboard images are not necessarly square like a normal chessboard. In this exercise, you will identify the edges, or the contours of the image. This is a critical step in calibrating the camera. There are many possible implementations for edge detectors, we only require that you not use an existing utility like opencv to detect contours, or other similiar libraries.
 
 ### 1.a - Image Preperation (5 pts)
 
