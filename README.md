@@ -232,5 +232,5 @@ This was our output point cloud from the statue dataset (using some handcrafted 
 Feel free to run camera calibration on your own phone using a printed-out checkerboard if you want to capture real-world images! We recommend printing out the checkerboard intead of taking pictures of the checkerboard on your screen to reduce moire effects. The checkerboard should cover the entire FoV of the camera.
 
 # Attribution
-Parts of this pset were inspired by CS231A, taught by Jeanette Bohg in spring 2024.
+Parts of this pset were inspired by CS231A, taught by Jeannette Bohg and Silvio Savarese in spring 2024.
 The Arc de Triomphe model can be found here: https://rigmodels.com/model.php?view=Arc_de_Triomphe_3d_model__65937fd27de647c0a8ac99ce8275c03e. It has a royalty-free license.
