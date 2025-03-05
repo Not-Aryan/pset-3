@@ -84,9 +84,9 @@ Distortion Coefficients recovered by OpenCV are defined as $(k_1, k_2, p_1, p_2,
 
 The below equation applies a distortion.
 
-$$x_\text{distorted} = x(1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2p_1xy + p_2(r^2 + 2x^2)$$
+$$x_\text{corrected} = x(1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2p_1xy + p_2(r^2 + 2x^2)$$
 
-$$y_\text{distorted} = y(1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2p_2xy + p_1(r^2 + 2y^2)$$
+$$y_\text{corrected} = y(1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2p_2xy + p_1(r^2 + 2y^2)$$
 
 where 
 
