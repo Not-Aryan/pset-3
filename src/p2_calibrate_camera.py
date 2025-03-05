@@ -34,6 +34,7 @@ def undistort_image(image: np.ndarray,
         Numpy array containing the undistorted image
     """
     # TODO: Implement this method!
+    # Hint: use RectBivariateSpline from scipy.interpolate to inerpolate the corrected image
     raise NotImplementedError
 
 

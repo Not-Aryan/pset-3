@@ -92,13 +92,13 @@ where
 
 $$r^2 = x^2 + y^2$$
 
-Your task is to undo the distortion of the original image using the recovered intrinsic matrix and distortion coefficients by completing the definition of `undistort_image(image, camera_matrix, dist_coeffs)` in `p2_calibrate_camera.py`. It is helpful to break the problem down into two parts: 
-1. Recover the Optimal Camera Matrix, and
-2. Undistort the image and apply the new Optimal Camera Matrix.
+Your task is to undo the distortion of the original image using the recovered intrinsic matrix and distortion coefficients by completing the definition of `undistort_image(image, camera_matrix, dist_coeffs)` in `p2_calibrate_camera.py`. 
 
 Run `python -m src.p2_camera_calibration` to recover the camera parameters from simulation.
 
-Do not use OpenCV functions. If you are stuck, you may use `cv2.getOptimalNewCameraMatrix` and `cv2.undistort` for half credit.
+Do not use OpenCV functions. If you are stuck, you may use `cv2.getOptimalNewCameraMatrix` and `cv2.undistort` for half credit. If you do use OpenCV, it is helpful to break the problem down into two parts: 
+1. Recover the Optimal Camera Matrix, and
+2. Undistort the image.
 
 ## Part 3 - Epipolar Geometry (20 pts)
 
