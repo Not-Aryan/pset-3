@@ -1,5 +1,6 @@
 import os
 import sys
+sys.path.append(os.getcwd())
 import env
 import src.utils.engine as engine
 import src.utils.utils as utils
@@ -62,7 +63,8 @@ def estimate_initial_RT(E: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
 def find_best_RT(candidate_Rs: List[np.ndarray], 
                  candidate_ts: List[np.ndarray], 
                  inlier_pts1: np.ndarray, 
-                 inlier_pts2: np.ndarray):
+                 inlier_pts2: np.ndarray,
+                 camera_matrix: np.ndarray):
     """
     Find the best R and t that maximizes the number of inliers
     Args:
@@ -216,7 +218,7 @@ if __name__ == '__main__':
     print("Estimated T:\n", T)
 
     # Part 5.d
-    R, T = find_best_RT(R, T, inlier_pts1, inlier_pts2)
+    R, T = find_best_RT(R, T, inlier_pts1, inlier_pts2, camera_matrix)
     print
     print("Best R:\n", R)
     print("Best T:\n", T)
