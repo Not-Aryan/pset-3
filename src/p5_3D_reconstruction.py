@@ -24,7 +24,7 @@ def recover_fundamental_matrix(kp1: List[cv2.KeyPoint],
         kp2: Keypoints in the second image
         good_matches: Good matches between the keypoints
     Returns:
-        The fundamental matrix, the mask, and the inlier points in the first and second images
+        The fundamental matrix, the mask, and the points from good_matches in the first and second images
     """
     # TODO: Implement this method!
     # Hint: Use parse_matches defined below and cv2.findFundamentalMat
