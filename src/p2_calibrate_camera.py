@@ -34,9 +34,8 @@ def undistort_image(image: np.ndarray,
         Numpy array containing the undistorted image
     """
     # TODO: Implement this method!
-    # Hint: use RectBivariateSpline from scipy.interpolate to inerpolate the corrected image
+    # HINT: use scipy.ndimage.map_coordinates to remap the image
     raise NotImplementedError
-
 
 def load_grayscale_image(image: np.ndarray) -> np.ndarray:
     gray_image = np.mean(image, axis=2).astype(np.uint8)
