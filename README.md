@@ -68,7 +68,7 @@ In `p2_calibrate_camera.py`, define the interior dimensions (number of squares -
 
 ### 2.c - Calibrate Camera (6 pts)
 
-To calibrate the camera, we need to compare the image corners with the corresponding points of a known 3D object. In this case, it is the chessboard. We can assume the surface of the chessboard is perfectly flat, so all z-values of the object points should be 0. Complete the `get_3D_object_points(chessboard_size)` in `p2_calibrate_camera.py` which defines the corresponding 3D points for each corner. You can assume the first point is (0, 0, 0) and the last point is (chessboard_size[0], chessboard_size[1], 0). The 3D points should be in the same order as the recovered chessboard corners.
+To calibrate the camera, we need to compare the image corners with the corresponding points of a known 3D object. In this case, it is the chessboard. We can assume the surface of the chessboard is perfectly flat, so all z-values of the object points should be 0. Complete the `get_3D_object_points(chessboard_size)` in `p2_calibrate_camera.py` which defines the corresponding 3D points for each corner. You can assume the first point is (0, 0, 0) and the last point is (chessboard_size[0]-1, chessboard_size[1]-1, 0). The 3D points should be in the same order as the recovered chessboard corners.
 
 Once you have correctly defined the 3D points, you should be able to recover the intrinsic matrix and estimated distortion coefficients. We have artificially distorted the image, so the recovered intrinsic matrix may be different from the ideal matrix you computed in 2.a.
 
