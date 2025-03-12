@@ -36,7 +36,10 @@ def main():
     camera_matrix, dist_coeffs = calibrate_camera_from_chessboard(chessboard_path, chessboard_size)
 
     # USE THIS CAMERA MATRIX FOR THE REST OF THE PIPELINE
-    camera_matrix = np.load(env.p6.camera_matrix)
+    camera_matrix = np.eye(3)
+    focal_length = 719.5459
+    camera_matrix[0,0] = focal_length
+    camera_matrix[1,1] = focal_length
 
     image_files = sorted([
         f for f in os.listdir(images_folder)
