@@ -35,6 +35,9 @@ def main():
 
     camera_matrix, dist_coeffs = calibrate_camera_from_chessboard(chessboard_path, chessboard_size)
 
+    # USE THIS CAMERA MATRIX FOR THE REST OF THE PIPELINE
+    camera_matrix = np.load(env.p6.camera_matrix)
+
     image_files = sorted([
         f for f in os.listdir(images_folder)
         if f.lower().endswith(('.png', '.jpg', '.jpeg'))

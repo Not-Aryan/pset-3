@@ -87,3 +87,5 @@ class p6:
     output = project_output / 'p6_SfM_pipeline'
     statue_images = data / 'statue'
     pointcloud = output / 'pointcloud.npy'
+    camera_matrix = data / 'camera_matrix.npy'
+    fundamental_matrices = data / 'fundamental_matrices.npy'
