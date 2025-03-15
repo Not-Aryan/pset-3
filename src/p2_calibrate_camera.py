@@ -7,35 +7,72 @@ import numpy as np
 from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
+from scipy import ndimage
 
 
 def get_3D_object_points(chessboard_size: tuple) -> np.ndarray:
-    """
-    Get the 3D object points of a chessboard
-    Args:
-        chessboard_size: Tuple containing the number of columns and rows in the chessboard
-    Returns:
-        Numpy array containing the 3D object points
-    """
-    # TODO: Implement this method!
-    raise NotImplementedError
+    """Get the 3D object points of a chessboard"""
+    columns, rows = chessboard_size
+    
+    object_points = np.zeros((rows * columns, 3), dtype=np.float32)
+    
+    for i in range(rows):
+        for j in range(columns):
+            idx = i * columns + j
+            object_points[idx] = [j, i, 0]
+    
+    return object_points
 
 
 def undistort_image(image: np.ndarray, 
                     camera_matrix: np.ndarray, 
                     dist_coeffs: np.ndarray) -> np.ndarray:
-    """
-    Undistort an image
-    Args:
-        image: Numpy array containing the image
-        camera_matrix: Numpy array containing the camera matrix
-        dist_coeffs: Numpy array containing the distortion coefficients
-    Returns:
-        Numpy array containing the undistorted image
-    """
-    # TODO: Implement this method!
-    # HINT: use scipy.ndimage.map_coordinates to remap the image
-    raise NotImplementedError
+    """Undistort an image using camera parameters"""
+    height, width = image.shape[:2]
+    
+    # Create meshgrid of pixel coordinates
+    y, x = np.mgrid[0:height, 0:width].astype(np.float32)
+    
+    # Extract camera parameters
+    fx = camera_matrix[0, 0]
+    fy = camera_matrix[1, 1]
+    cx = camera_matrix[0, 2]
+    cy = camera_matrix[1, 2]
+    
+    # Normalize coordinates (convert from pixel to camera coordinates)
+    x_norm = (x - cx) / fx
+    y_norm = (y - cy) / fy
+    
+    # Calculate radius squared
+    r2 = x_norm**2 + y_norm**2
+    r4 = r2**2
+    r6 = r2**3
+    
+    # Extract distortion coefficients
+    k1, k2, p1, p2, k3 = dist_coeffs.flatten()
+    
+    # Apply radial distortion
+    x_distorted = x_norm * (1 + k1*r2 + k2*r4 + k3*r6)
+    y_distorted = y_norm * (1 + k1*r2 + k2*r4 + k3*r6)
+    
+    # Apply tangential distortion
+    x_distorted = x_distorted + 2*p1*x_norm*y_norm + p2*(r2 + 2*x_norm**2)
+    y_distorted = y_distorted + p1*(r2 + 2*y_norm**2) + 2*p2*x_norm*y_norm
+    
+    # Convert back to pixel coordinates
+    x_pixel = x_distorted * fx + cx
+    y_pixel = y_distorted * fy + cy
+    
+    # Create output image
+    undistorted = np.zeros_like(image)
+    
+    # Remap each channel
+    for c in range(image.shape[2]):
+        undistorted[:, :, c] = ndimage.map_coordinates(image[:, :, c], 
+                                                      [y_pixel.flatten(), x_pixel.flatten()],
+                                                      order=1).reshape(height, width)
+    
+    return undistorted
 
 def load_grayscale_image(image: np.ndarray) -> np.ndarray:
     gray_image = np.mean(image, axis=2).astype(np.uint8)
@@ -81,10 +118,21 @@ if __name__ == "__main__":
     expected_camera_matrix = np.load(env.p2.expected_camera_matrix)
     expected_dist_coeffs = np.load(env.p2.expected_dist_coeffs)
     # Part 2.a
+    # Calculate focal ratio: f_r = 1 / (2*tan(FoV/2))
+    f_r = 1 / (2 * np.tan(np.deg2rad(45) / 2))
+    
+    image_info = Image.open(env.p1.chessboard_path)
+    width, height = image_info.size
+    
+    focal_length = f_r * min(height, width)
+    
+    c_x = width / 2
+    c_y = height / 2
+    
     ideal_intrinsic_matrix = np.array([
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
+        [focal_length, 0, c_x],
+        [0, focal_length, c_y],
+        [0, 0, 1]
     ])
 
     # Part 2.b
